@@ -33,16 +33,20 @@ public class MedicService {
         return medicRepository.save(medic);
     }
 
-    public void delete(Medic medic) {
+    public boolean delete(Medic medic) {
         medicRepository.delete(medic);
+        return true;
     }
 
     public Medic update(Integer id, Medic medic) {
         Medic medicFound = findById(id);
         medicFound.setName(medic.getName());
         medicFound.setLastName(medic.getLastName());
+        medicFound.setOffice(medic.getOffice());
+        medicFound.setPatients(medic.getPatients());
+        medicFound.setSpecializations(medic.getSpecializations());
         medicRepository.save(medicFound);
-        return medicFound;
+        return findById(id);
     }
 
     public List<Patient> getPatients(Medic medic) {

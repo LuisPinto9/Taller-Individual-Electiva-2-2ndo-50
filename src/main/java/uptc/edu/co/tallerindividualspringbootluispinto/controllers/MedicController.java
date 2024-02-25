@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uptc.edu.co.tallerindividualspringbootluispinto.entities.Medic;
-import uptc.edu.co.tallerindividualspringbootluispinto.entities.Patient;
 import uptc.edu.co.tallerindividualspringbootluispinto.response.ResponseHandler;
 import uptc.edu.co.tallerindividualspringbootluispinto.services.MedicService;
 
@@ -68,14 +67,19 @@ public class MedicController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Integer id) {
-        Medic medic = medicService.findById(id);
-        if (medic != null) {
-            medicService.delete(medic);
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, medic);
-        } else {
-            return ResponseHandler.generateResponse("Succes", HttpStatus.NOT_FOUND, null);
+        try {
+            Medic medic = medicService.findById(id);
+            if (medic != null) {
+                return ResponseHandler.generateResponse("Success", HttpStatus.OK,
+                        medicService.delete(medic));
+            } else {
+                return ResponseHandler.generateResponse("Succes", HttpStatus.NOT_FOUND, null);
+            }
+        } catch (Error e) {
+            return ResponseHandler.generateResponse("Error", HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Integer id, @RequestBody Medic updatedMedic) {

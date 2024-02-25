@@ -29,8 +29,8 @@ public class Medic implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "medics_patients",
-            joinColumns = @JoinColumn(name = "idMedic"),
-            inverseJoinColumns = @JoinColumn(name = "idPatient")
+            joinColumns = @JoinColumn(name = "IdMedic"),
+            inverseJoinColumns = @JoinColumn(name = "IdPatient")
     )
     private List<Patient> patients;
 
@@ -38,7 +38,7 @@ public class Medic implements Serializable {
     private List<Specialization> specializations;
 
     @OneToOne(mappedBy = "medic", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idOffice")
+    @JoinColumn(name = "IdOffice")
     private Office office;
 
     public List<Patient> getPatients() {

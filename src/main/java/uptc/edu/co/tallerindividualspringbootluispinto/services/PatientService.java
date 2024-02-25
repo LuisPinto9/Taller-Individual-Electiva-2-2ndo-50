@@ -32,8 +32,9 @@ public class PatientService {
         Patient patientFound = findById(id);
         patientFound.setName(patient.getName());
         patientFound.setLastname(patient.getLastname());
+        patientFound.setMedics(patient.getMedics());
         patientRepository.save(patientFound);
-        return patientFound;
+        return findById(id);
     }
 
     public void delete(Patient patient) {
