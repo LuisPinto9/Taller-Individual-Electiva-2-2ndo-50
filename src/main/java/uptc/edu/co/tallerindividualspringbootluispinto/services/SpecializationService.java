@@ -33,7 +33,6 @@ public class SpecializationService {
     public Specialization update(Integer id, Specialization Specialization) {
         Specialization SpecializationFound = findById(id);
         SpecializationFound.setName(Specialization.getName());
-        SpecializationFound.setMedic(Specialization.getMedic());
         specializationRepository.save(SpecializationFound);
         return findById(id);
     }

@@ -34,7 +34,6 @@ public class OfficeService {
         OfficeFound.setName(Office.getName());
         OfficeFound.setAddress(Office.getAddress());
         OfficeFound.setFloor(Office.getFloor());
-        OfficeFound.setMedic(Office.getMedic());
         officeRepository.save(OfficeFound);
         return findById(id);
     }
